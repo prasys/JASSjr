@@ -1,3 +1,12 @@
 *.class
 *.bin
 *~
+.DS_Store
+index.out2
+jassjr/JASSjr_index.ctxt
+jassjr/JASSjr_index.java
+jassjr/JASSjr_search.ctxt
+jassjr/JASSjr_search.java
+jassjr/package.bluej
+jassjr/README.TXT
+JASSjr_index.jpy
