@@ -40,14 +40,16 @@ class CreateIndex:
         ''' returns the id, title and text of the next page in the collection '''
         doc=[]
         for line in self.collFile:
-            if line=='</page>\n':
+            print(line)
+            if line=='</DOC>\n':
                 break
             doc.append(line)
         
         curPage=''.join(doc)
-        pageid=re.search('<id>(.*?)</id>', curPage, re.DOTALL)
-        pagetitle=re.search('<title>(.*?)</title>', curPage, re.DOTALL)
-        pagetext=re.search('<text>(.*?)</text>', curPage, re.DOTALL)
+        pageid=re.search('<DOCNO>(.*?)</DOCNO>', curPage, re.DOTALL)
+        print(pageid)
+        pagetitle=re.search('<IN>(.*?)</IN>', curPage, re.DOTALL)
+        pagetext=re.search('<TEXT>(.*?)</TEXT>', curPage, re.DOTALL)
         
         if pageid==None or pagetitle==None or pagetext==None:
             return {}
@@ -97,7 +99,7 @@ class CreateIndex:
         #main loop creating the index
         while pagedict != {}:                    
             lines='\n'.join((pagedict['title'],pagedict['text']))
-            pageid=int(pagedict['id'])
+            pageid=str(pagedict['id'])
             terms=self.getTerms(lines)
 
             
