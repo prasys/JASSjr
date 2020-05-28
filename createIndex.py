@@ -1,14 +1,5 @@
-'''
-Author: Arden Dertat
-Contact: ardendertat@gmail.com
-License: MIT License
-'''
-
-#!/usr/bin/env python
-
 import sys
 import re
-#from porterStemmer import PorterStemmer
 from collections import defaultdict
 from array import array
 import gc
@@ -19,17 +10,9 @@ class CreateIndex:
     def __init__(self):
         self.index=defaultdict(list)    #the inverted index
 
-    
-    def getStopwords(self):
-        '''get stopwords from the stopwords file'''
-        f=open(self.stopwordsFile, 'r')
-        stopwords=[line.rstrip() for line in f]
-        self.sw=dict.fromkeys(stopwords)
-        f.close()
-        
 
     def getTerms(self, line):
-        '''given a stream of text, get the terms from the text'''
+        '''given a stream of text, get the terms from the text''' 
         line=line.lower()
         line=re.sub(r'[^a-z0-9 ]',' ',line) #put spaces instead of non-alphanumeric characters
         line=line.split()
@@ -45,11 +28,10 @@ class CreateIndex:
                 break
             doc.append(line)
         
-        curPage=''.join(doc)
-        pageid=re.search('<DOCNO>(.*?)</DOCNO>', curPage, re.DOTALL)
-        print(pageid)
-        pagetitle=re.search('<IN>(.*?)</IN>', curPage, re.DOTALL)
-        pagetext=re.search('<TEXT>(.*?)</TEXT>', curPage, re.DOTALL)
+        curPage=''.join(doc) ## current document collection 
+        pageid=re.search('<DOCNO>(.*?)</DOCNO>', curPage, re.DOTALL) #parse the primary key/document id where we have found this collection 
+        pagetitle=re.search('<IN>(.*?)</IN>', curPage, re.DOTALL) ## TO CHANGE IT TO READ THE TAGS , MIGHT USE BEAUTIFULSOUP to achieve this 
+        pagetext=re.search('<TEXT>(.*?)</TEXT>', curPage, re.DOTALL)  ## TO CHANGE IT TO READ THE TAGS , MIGHT USE BEAUTIFULSOUP to achieve this 
         
         if pageid==None or pagetitle==None or pagetext==None:
             return {}
