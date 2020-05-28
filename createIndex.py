@@ -59,9 +59,8 @@ class CreateIndex:
         
 
     def getParams(self):
-        '''get the parameters stopwords file, collection file, and the output index file'''
+        '''get the collection file, and the output index file'''
         param=sys.argv
-      ##  self.stopwordsFile=param[1]
         self.collectionFile=param[1]
         self.indexFile=param[2]
         
@@ -70,8 +69,6 @@ class CreateIndex:
         '''main of the program, creates the index'''
         self.getParams()
         self.collFile=open(self.collectionFile,'r')
-      #  self.getStopwords()
-                
         #bug in python garbage collector!
         #appending to list becomes O(N) instead of O(1) as the size grows if gc is enabled.
         gc.disable()
