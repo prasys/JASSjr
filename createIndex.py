@@ -3,7 +3,7 @@ import re
 from collections import defaultdict
 from array import array
 import gc
-
+import pickle as pickle
 
 class CreateIndex:
 
@@ -53,7 +53,11 @@ class CreateIndex:
                 docID=p[0]
                 positions=p[1]
                 postinglist.append(':'.join([str(docID) ,','.join(map(str,positions))]))
-            print(''.join((term,'|',';'.join(postinglist))),file=f)
+
+            test = ''.join((term,'|',';'.join(postinglist))
+            pickle.dump(test,f)
+
+          #  print(''.join((term,'|',';'.join(postinglist))),file=f)
             
         f.close()
         
